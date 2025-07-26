@@ -1,0 +1,379 @@
+{
+	"info": {
+		"_postman_id": "phone-auth-system",
+		"name": "Phone Auth System",
+		"description": "API для авторизации по номеру телефона с реферальной системой",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Send SMS Code",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Сохраняем verification_code для следующего запроса",
+							"if (pm.response.code === 200) {",
+							"    var responseJson = pm.response.json();",
+							"    pm.collectionVariables.set('verification_code', responseJson.verification_code);",
+							"    pm.collectionVariables.set('phone_number', responseJson.phone_number);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone_number\": \"+375294567892\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/users/send-code/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"send-code",
+						""
+					]
+				},
+				"description": "Отправляет 4-значный код верификации на указанный номер телефона. Имитирует задержку SMS 1-2 секунды."
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone_number\": \"+375294567892\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/send-code/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"send-code",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Код отправлен на номер\",\n    \"phone_number\": \"+375294567892\",\n    \"verification_code\": \"1234\"\n}"
+				}
+			]
+		},
+		{
+			"name": "2. Verify Code",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Сохраняем токен для авторизации",
+							"if (pm.response.code === 200) {",
+							"    var responseJson = pm.response.json();",
+							"    pm.collectionVariables.set('auth_token', responseJson.token);",
+							"    pm.collectionVariables.set('user_id', responseJson.user_id);",
+							"    pm.collectionVariables.set('invite_code', responseJson.invite_code);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"phone_number\": \"{{phone_number}}\",\n    \"verification_code\": \"{{verification_code}}\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/users/verify-code/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"verify-code",
+						""
+					]
+				},
+				"description": "Верифицирует SMS-код и авторизует/регистрирует пользователя. Возвращает токен для дальнейших запросов."
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"phone_number\": \"+375294567892\",\n    \"verification_code\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/verify-code/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"verify-code",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Успешная авторизация\",\n    \"token\": \"abc123def456\",\n    \"user_id\": 1,\n    \"phone_number\": \"+375294567892\",\n    \"invite_code\": \"ABC123\",\n    \"is_new_user\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "3. Get Profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{auth_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/users/profile/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"profile",
+						""
+					]
+				},
+				"description": "Получает профиль текущего пользователя со списком рефералов. Требует авторизации."
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token abc123def456",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/profile/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"profile",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"user_id\": 1,\n    \"phone_number\": \"+375294567892\",\n    \"invite_code\": \"ABC123\",\n    \"activated_invite_code\": null,\n    \"referrals\": [\n        {\n            \"phone_number\": \"+375291234567\",\n            \"joined_date\": \"2025-07-24T17:43:17.442191Z\"\n        }\n    ],\n    \"referrals_count\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "4. Activate Invite Code",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{auth_token}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"invite_code\": \"ABC123\"\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/users/activate-invite/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"activate-invite",
+						""
+					]
+				},
+				"description": "Активирует инвайт-код другого пользователя. Каждый пользователь может активировать только один инвайт-код."
+			},
+			"response": [
+				{
+					"name": "Success Response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token abc123def456",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"invite_code\": \"ABC123\"\n}"
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/activate-invite/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"activate-invite",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Инвайт-код успешно активирован\",\n    \"activated_invite_code\": \"ABC123\",\n    \"inviter_phone\": \"+375294567892\"\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "phone_number",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "verification_code",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "invite_code",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

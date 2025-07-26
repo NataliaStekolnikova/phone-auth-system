@@ -1,0 +1,108 @@
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 505
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2343
+Not Found: /api/users/
+"GET /api/users/ HTTP/1.1" 404 3004
+"GET / HTTP/1.1" 200 505
+Method Not Allowed: /api/users/send-code/
+"GET /api/users/send-code/ HTTP/1.1" 405 5712
+"GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121457
+"GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1719
+"GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 39680
+"GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+"GET /static/rest_framework/js/default.js HTTP/1.1" 200 1268
+"GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3385
+"GET /static/rest_framework/css/default.css HTTP/1.1" 200 1152
+"GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 3597
+"GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+"GET /static/rest_framework/js/jquery-3.5.1.min.js HTTP/1.1" 200 89476
+"GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
+"OPTIONS /api/users/send-code/ HTTP/1.1" 200 5980
+"POST /api/users/send-code/ HTTP/1.1" 200 5798
+Method Not Allowed: /api/users/verify-code/
+"GET /api/users/verify-code/ HTTP/1.1" 405 5665
+"POST /api/users/verify-code/ HTTP/1.1" 200 5886
+"OPTIONS /api/users/verify-code/ HTTP/1.1" 200 5922
+Unauthorized: /api/users/profile/
+"GET /api/users/profile/ HTTP/1.1" 401 5125
+Unauthorized: /api/users/profile/
+"GET /api/users/profile/ HTTP/1.1" 401 5125
+Unauthorized: /api/users/profile/
+"GET /api/users/profile/ HTTP/1.1" 401 5125
+Unauthorized: /api/users/profile/
+"GET /api/users/profile/?format=json HTTP/1.1" 401 82
+Unauthorized: /api/users/profile/
+"GET /api/users/profile/ HTTP/1.1" 401 5125
+Unauthorized: /api/users/profile/
+"GET /api/users/profile/?format=api HTTP/1.1" 401 5158
+Unauthorized: /api/users/profile/
+"GET /api/users/profile/?format=api HTTP/1.1" 401 5158
+C:\phone_auth_system\auth_project\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/users/profile/
+"GET /api/users/profile/?format=api HTTP/1.1" 401 5158
+Unauthorized: /api/users/profile/
+"GET /api/users/profile/?format=api HTTP/1.1" 401 5158
+Unauthorized: /api/users/profile/
+"GET /api/users/profile/ HTTP/1.1" 401 5125
+C:\phone_auth_system\users\views.py changed, reloading.
+Watching for file changes with StatReloader
+C:\phone_auth_system\users\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 505
+Method Not Allowed: /api/users/drf-login/
+"GET /api/users/drf-login/ HTTP/1.1" 405 5850
+Method Not Allowed: /api/users/send-code/
+"GET /api/users/send-code/ HTTP/1.1" 405 5712
+"POST /api/users/send-code/ HTTP/1.1" 200 5798
+Method Not Allowed: /api/users/verify-code/
+"GET /api/users/verify-code/ HTTP/1.1" 405 5665
+"POST /api/users/verify-code/ HTTP/1.1" 200 5886
+Method Not Allowed: /api/users/drf-login/
+"GET /api/users/drf-login/ HTTP/1.1" 405 5850
+Method Not Allowed: /api/users/drf-login/
+"GET /api/users/drf-login/ HTTP/1.1" 405 5850
+"POST /api/users/drf-login/ HTTP/1.1" 200 6098
+"GET /api/users/profile/ HTTP/1.1" 200 5669
+Method Not Allowed: /api/users/activate-invite/
+"GET /api/users/activate-invite/ HTTP/1.1" 405 5768
+Bad Request: /api/users/activate-invite/
+"POST /api/users/activate-invite/ HTTP/1.1" 400 5755
+C:\phone_auth_system\users\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 505
+C:\phone_auth_system\users\urls.py changed, reloading.
+Watching for file changes with StatReloader
+C:\phone_auth_system\auth_project\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 302 0
+"GET /api/users/web/ HTTP/1.1" 200 1282
+"GET /static/users/js/app.js HTTP/1.1" 200 0
+"GET /static/users/css/style.css HTTP/1.1" 200 532
+"POST /api/users/web/send-code/ HTTP/1.1" 200 1654
+"POST /api/users/web/verify/ HTTP/1.1" 302 0
+"GET /api/users/web/profile/ HTTP/1.1" 200 2400
+"POST /api/users/web/profile/ HTTP/1.1" 200 2438
+"GET /static/users/css/style.css HTTP/1.1" 304 0
+"GET /api/users/web/logout/ HTTP/1.1" 302 0
+"GET /api/users/web/ HTTP/1.1" 200 1456
+"GET /static/users/js/app.js HTTP/1.1" 304 0
+"POST /api/users/web/send-code/ HTTP/1.1" 200 1652
+"GET /api/users/web/ HTTP/1.1" 200 1282
+- Broken pipe from ('127.0.0.1', 61341)
+"POST /api/users/web/send-code/ HTTP/1.1" 200 1654
+"POST /api/users/web/verify/ HTTP/1.1" 302 0
+"GET /api/users/web/profile/ HTTP/1.1" 200 2400
+"GET /static/users/css/style.css HTTP/1.1" 304 0
+"POST /api/users/web/profile/ HTTP/1.1" 200 2403
+"POST /api/users/web/profile/ HTTP/1.1" 200 2438
+"GET /api/users/web/logout/ HTTP/1.1" 302 0
+"GET /api/users/web/ HTTP/1.1" 200 1456
+"GET /api/ HTTP/1.1" 200 531
+C:\phone_auth_system\auth_project\settings.py changed, reloading.
+Watching for file changes with StatReloader
+C:\phone_auth_system\auth_project\settings.py changed, reloading.

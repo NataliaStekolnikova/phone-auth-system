@@ -1,0 +1,40 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Подтверждение - Phone Auth System{% endblock %}
+
+{% block content %}
+<div class="logo">
+    <h1>🔐 Подтверждение</h1>
+    <p>Введите код из SMS</p>
+</div>
+
+{% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<form method="post" action="{% url 'web_verify' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="verification_code">Код подтверждения</label>
+        <input type="text" 
+               id="verification_code" 
+               name="verification_code" 
+               class="code-input" 
+               placeholder="1234" 
+               maxlength="4" 
+               required>
+        <div class="phone-hint">Код отправлен на номер {{ phone_number }}</div>
+    </div>
+    <button type="submit" class="btn">Подтвердить</button>
+</form>
+
+<div class="back-link">
+    <a href="{% url 'index' %}">← Изменить номер</a>
+</div>
+{% endblock %}
